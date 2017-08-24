@@ -1,0 +1,31 @@
+---
+# tasks file for set-ceph-prerequisites
+- name: Make sure if ntp is installed
+  yum:
+    name: ntp
+    state: latest
+
+- name: Stop ntp service before configuration
+  service:
+    name: ntpd
+    state: stopped
+    enabled: yes
+
+- name: Set time sync
+  command: ntpdate "{{ ntp_server }}"
+  ignore_errors: true
+
+- name: NTP confinguration
+  template:
+    dest: /etc/ntp.conf
+    src: ../templates/ntp.conf.j2
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Start ntp service
+  service:
+    name: ntpd
+    state: started
+
+

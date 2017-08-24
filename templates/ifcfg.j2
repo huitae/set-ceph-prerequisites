@@ -1,0 +1,12 @@
+IPV6INIT=no
+BOOTPROTO=static
+DEVICE={{ hostvars[inventory_hostname]['ansible_' + clsuter_interface] }}
+NAME={{ hostvars[inventory_hostname]['ansible_' + cluster_interface] }}
+ONBOOT=yes
+TYPE=Ethernet
+IPV4_FAILURE_FATAL=no
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+NM_CONTROLLED=no
+IPADDR={{ cluster_address }}
+PREFIX={{ cluster_prefix }}

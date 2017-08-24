@@ -1,0 +1,19 @@
+---
+# tasks file for set-ceph-prerequisites
+- name: Create user who will run ansible for Ceph deployment
+  user:
+    name: rhcs-user
+    createhome: true
+    state: present
+     
+- name: Set password for rhcs-user
+  shell: echo "rhcs-user:redhat" | chpasswd
+
+- name: Set privileges for root
+  template:
+    src: ../templates/rhcs-user.j2
+    dest: /etc/sudoers.d/rhcs-user
+    owner: root
+    group: root
+    mode: 0440
+

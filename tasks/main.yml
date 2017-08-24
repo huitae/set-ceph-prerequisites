@@ -1,0 +1,7 @@
+---
+- include: ./set_sysctl.yml
+- include: ./update_packages.yml
+- include: ./set_firewall.yml
+- include: ./set_ntp.yml
+- include: ./create_ansible_user.yml
+

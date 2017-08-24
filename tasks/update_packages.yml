@@ -1,0 +1,8 @@
+---
+# tasks file for set-ceph-prerequisites
+- name: Update all packages on RHEL
+  yum:
+    name: '*'
+    state: latest
+  when: pkg_update == 'yes'
+

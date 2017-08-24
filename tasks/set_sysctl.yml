@@ -1,0 +1,9 @@
+---
+# tasks file for set-ceph-prerequisites
+- name: Check and set pid_max in sysctl.conf
+  sysctl:
+    name: kernel.pid_max
+    value: 4194303
+    state: present
+    reload: yes
+    sysctl_set: yes
