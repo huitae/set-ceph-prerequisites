@@ -17,7 +17,7 @@ pgk_update - Enable package update (default: no)
 
 Inventory
 =========
-
+You can use /etc/ansible/hosts inventory file that is used by ceph-ansible.
 - osd
 - mons
 - rgws
