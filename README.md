@@ -12,8 +12,8 @@ For Ceph deployment, you need to use ceph-ansible after perform this prerequisit
 Variables
 =========
 
-ntp_server - NTP hostname or IP (default: sia.pool.ntp.org)
-pgk_update - Enable package update (default: no)
+- ntp_server - NTP hostname or IP (default: 0.asia.pool.ntp.org)
+- pgk_update - Enable package update (default: no)
 
 Inventory
 =========
