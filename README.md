@@ -1,11 +1,24 @@
 Set-ansible-prerequites
 =======================
 
-Playbooks that make prerequisites work automated for all Ceph Cluster nodes
+This playbook perform prerequisites for OS when deploying Ceph Cluster including:
+- Set NTP 
+- Set sysctl parameters
+- Package update
+- Set firewall
+
 
 Variables
 =========
 
 ntp_server - NTP hostname or IP (default: sia.pool.ntp.org)
 pgk_update - Enable package update (default: no)
+
+Inventory
+=========
+
+[osd]
+[mons]
+[rgws]
+[console]
 
