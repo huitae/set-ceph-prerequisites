@@ -7,6 +7,7 @@ This playbook perform prerequisites for OS when deploying Ceph Cluster including
 - Package update
 - Set firewall
 
+For Ceph deployment, you need to use ceph-ansible after perform this prerequisites on OS. 
 
 Variables
 =========
@@ -17,8 +18,8 @@ pgk_update - Enable package update (default: no)
 Inventory
 =========
 
-[osd]
-[mons]
-[rgws]
-[console]
+- osd
+- mons
+- rgws
+- console
 
