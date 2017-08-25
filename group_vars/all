@@ -1,5 +1,5 @@
 # NTP hostname or IP
-ntp_server: 0.ntp.int.seoul.test
+ntp_server: 0.asia.pool.ntp.org
 
 # Perform package update
 pkg_update: no

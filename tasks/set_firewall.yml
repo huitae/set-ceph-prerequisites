@@ -37,3 +37,29 @@
     - 80/tcp
     - 443/tcp
   when: (groups['rgws'] is defined) and (ansible_hostname in groups['rgws'])
+
+- name: Set firewall policy for Storage Console (Port group)
+  firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  with_items:
+    - 10443/tcp
+    - 8080/tcp
+    - 80/tcp
+    - 443/tcp
+    - 4505-4506/tcp
+    - 10080/tcp
+    - 2003/tcp
+  when: (groups['console'] is defined) and (ansible_hostname in groups['console'])
+
+- name: Set firewall policy for Storage Console (Service group)
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  with_items:
+    - ceph-installer
+  when: (groups['console'] is defined) and (ansible_hostname in groups['console'])
