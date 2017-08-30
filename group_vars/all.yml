@@ -4,7 +4,7 @@ ntp_server: 0.asia.pool.ntp.org
 # Perform package update
 pkg_update: no
 
-rgw_vip: 172.20.23.160
+keepalived_vip: 172.20.23.160
 
 haproxy_backend_servers:
  - name: ceph2-mon004
@@ -16,4 +16,5 @@ haproxy_backend_servers:
 
 keepalived_master: ceph2-mon004
 keepalived_master_priority: 110
+keepalived_mackup_priority: 100
 

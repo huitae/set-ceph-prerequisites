@@ -13,12 +13,12 @@ vrrp_instance VI_1 {
   {% endif %}
   virtual_router_id 60
   {% if ansible_hostname == keepalived_master %}
-  priority {{ keepalived_master_priority }} # 101 on haproxy, 100 on haproxy2
+  priority {{ keepalived_master_priority }} # 
   {% else %}
-  priority 100 # 101 on haproxy, 100 on haproxy2
+  priority {{ keepalived_backup_priority }} #
   {% endif %}
   virtual_ipaddress {
-    {{ rgw_vip }} # virtual ip address
+    {{ keepalived_vip }} # virtual ip address
   }
   track_script {
     chk_haproxy
