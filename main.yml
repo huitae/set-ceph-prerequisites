@@ -1,3 +1,15 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: set StrictHostKeyChecking to "no"
+      command: "/usr/bin/echo 'StrictHostKeyChecking no' > /root/.ssh/config"
+
+    - name: set permission on /root/.ssh/config file
+      file:
+        path: /root/.ssh/config
+        mode: 0644
+
+
 - hosts: all
   tasks: 
     - include: tasks/main.yml

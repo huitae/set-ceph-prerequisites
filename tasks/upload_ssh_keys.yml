@@ -1,0 +1,8 @@
+---
+# tasks file for set-ceph-prerequisites
+- name: Copy SSH key to remote hosts 
+  authorized_key:
+    user: root
+    key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+    state: present
+
