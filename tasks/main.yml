@@ -1,8 +1,9 @@
 ---
-#- include: ./set_sysctl.yml
-#- include: ./update_packages.yml
-#- include: ./set_firewall.yml
-#- include: ./set_ntp.yml
+- include: ./upload_ssh_keys.yml
+- include: ./set_sysctl.yml
+- include: ./update_packages.yml
+- include: ./set_firewall.yml
+- include: ./set_ntp.yml
 - include: ./set_loadbalancer.yml
   when: ( groups['rgws'] is defined ) and ( ansible_hostname in groups['rgws'] )
 
