@@ -7,11 +7,11 @@
     - name: Check if iperf3 is installed 
       stat:
         path: /usr/bin/iperf3
-        register: r
+      register: r
 
     - name : Copy iperf3 file if it is not installed
       copy:
-        src: files/iperf3-3.0.11-1.el7.x86_64.rpm
+        src: ../files/iperf3-3.0.11-1.el7.x86_64.rpm
         dest: /root/iperf3-3.0.11-1.el7.x86_64.rpm
       when: r.stat.exists == false
 
@@ -21,6 +21,6 @@
         state: installed
       when: r.stat.exists == false
 
-    - command: /usr/bin/iperf3 -c ceph-admin -i 1 
+    - command: /usr/bin/iperf3 -c ceph-admin -i 1 -T {{ inventory_hostname }}
       register: iperf_result
 
