@@ -1,9 +1,18 @@
 ---
-- include: ./upload_ssh_keys.yml
-- include: ./set_sysctl.yml
-- include: ./update_packages.yml
-- include: ./set_firewall.yml
-- include: ./set_ntp.yml
-- include: ./set_loadbalancer.yml
-  when: ( groups['rgws'] is defined ) and ( ansible_hostname in groups['rgws'] )
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: set StrictHostKeyChecking to "no"
+      command: "/usr/bin/echo 'StrictHostKeyChecking no' > /root/.ssh/config"
 
+    - name: set permission on /root/.ssh/config file
+      file:
+        path: /root/.ssh/config
+        mode: 0644
+
+- hosts: all
+  tasks:
+    - include: ./upload_ssh_keys.yml
+    - include: ./update_packages.yml
+    - include: ./set_firewall.yml
+    - include: ./set_ntp.yml
