@@ -9,6 +9,15 @@ This playbook perform prerequisites for OS when deploying Ceph Cluster including
 
 For Ceph deployment, you need to use ceph-ansible after perform this prerequisites on OS. 
 
+human_log.py callback pluging is from https://github.com/n0ts/ansible-human_log
+
+Set like this in ansible.cf:
+
+```
+[defaults]
+callback_plugins = path/to/callback_plugins/
+```
+
 Variables
 =========
 
