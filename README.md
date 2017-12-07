@@ -11,7 +11,7 @@ For Ceph deployment, you need to use ceph-ansible after perform this prerequisit
 
 human_log.py callback pluging is from https://github.com/n0ts/ansible-human_log
 
-Set like this in ansible.cf:
+Set like this in ansible.cfg:
 
 ```
 [defaults]
