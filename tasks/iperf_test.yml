@@ -1,0 +1,26 @@
+---
+- name: Check network bandwidth with iPerf3
+  hosts: osds
+  serial: 1
+  gather_facts: false
+  tasks:
+    - name: Check if iperf3 is installed 
+      stat:
+        path: /usr/bin/iperf3
+        register: r
+
+    - name : Copy iperf3 file if it is not installed
+      copy:
+        src: files/iperf3-3.0.11-1.el7.x86_64.rpm
+        dest: /root/iperf3-3.0.11-1.el7.x86_64.rpm
+      when: r.stat.exists == false
+
+    - name: Install Iperf3 if it is not installed
+      yum:
+        name: /root/iperf3-3.0.11-1.el7.x86_64.rpm
+        state: installed
+      when: r.stat.exists == false
+
+    - command: /usr/bin/iperf3 -c ceph-admin -i 1 
+      register: iperf_result
+
