@@ -23,8 +23,27 @@
     immediate: true
   with_items:
     - 6789/tcp
-    - 8002/tcp
   when: (groups['mons'] is defined) and (ansible_hostname in groups['mons'])
+
+- name: Set firewall policy for MGR
+  firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  with_items:
+    - 6800-7300/tcp
+  when: (groups['mgrs'] is defined) and (ansible_hostname in groups['mgrs'])
+
+- name: Set firewall policy for MDS
+  firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: true
+    immediate: true
+  with_items:
+    - 6800/tcp
+  when: (groups['mdss'] is defined) and (ansible_hostname in groups['mdss'])
 
 - name: Set firewall policy for RGWS
   firewalld:
@@ -35,31 +54,6 @@
   with_items:
     - 7480/tcp
     - 80/tcp
+    - 8080/tcp
     - 443/tcp
   when: (groups['rgws'] is defined) and (ansible_hostname in groups['rgws'])
-
-- name: Set firewall policy for Storage Console (Port group)
-  firewalld:
-    port: "{{ item }}"
-    state: enabled
-    permanent: true
-    immediate: true
-  with_items:
-    - 10443/tcp
-    - 8080/tcp
-    - 80/tcp
-    - 443/tcp
-    - 4505-4506/tcp
-    - 10080/tcp
-    - 2003/tcp
-  when: (groups['console'] is defined) and (ansible_hostname in groups['console'])
-
-- name: Set firewall policy for Storage Console (Service group)
-  firewalld:
-    service: "{{ item }}"
-    state: enabled
-    permanent: true
-    immediate: true
-  with_items:
-    - ceph-installer
-  when: (groups['console'] is defined) and (ansible_hostname in groups['console'])
