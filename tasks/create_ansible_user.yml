@@ -2,7 +2,7 @@
 # tasks file for set-ceph-prerequisites
 - name: Create user who will run ansible for Ceph deployment
   user:
-    name: rhcs-user
+    name: ceph
     createhome: true
     state: present
      
