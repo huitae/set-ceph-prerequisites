@@ -1,5 +1,5 @@
 [all]
-test01  ansible_host=192.168.10.10
+test02  ansible_host=192.168.10.12
 
 [linux]
 rhel8_01  ansible_host=192.168.10.11
