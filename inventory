@@ -3,3 +3,6 @@ test02  ansible_host=192.168.10.12
 
 [linux]
 rhel8_01  ansible_host=192.168.10.11
+
+[linux2]
+rhel8_02  ansible_host=192.168.10.13
