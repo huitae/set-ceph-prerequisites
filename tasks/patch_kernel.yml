@@ -1,0 +1,30 @@
+---
+- hosts: all
+  tasks:
+  - name: Check current kernel version
+    command: uname -a
+    register: old_kernel_result
+
+  - name: Patch kernel with latest version on RHEL
+    yum:
+      name: 'kernel'
+      state: latest
+
+  - name: Reboot the server 
+    command: reboot
+    when: reboot == "yes"
+
+  - name: Wait until the server is up
+    wait_for_connection: 
+      delay: 15
+      timeout: 300
+
+  - name: Check new kernel version
+    command: uname -a
+    register: new_kernel_result
+
+  - name: Compare the kernel version
+    debug: 
+      msg: 
+      - " Old kernel version: {{ old_kernel_result.stdout }}"
+      - " New kernel version: {{ new_kernel_result.stdout }}"
