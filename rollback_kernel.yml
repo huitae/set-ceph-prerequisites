@@ -13,6 +13,10 @@
       reboot_timeout: 300
     when: reboot == "yes"
 
+  - name: Check new kernel version
+    command: uname -r
+    register: new_kernel_result
+
   - name: Remove previous kernel
     yum: 
       name: "{{ item }}"
@@ -22,10 +26,6 @@
       - "kernel-modules-{{ old_kernel_result.stdout }}"
       - "kernel-{{ old_kernel_result.stdout }}"
     when: (delete_previous_kernel == "yes") and (old_kernel_result.stdout != new_kernel_result.stdout)
-
-  - name: Check new kernel version
-    command: uname -r
-    register: new_kernel_result
 
   - name: Compare the kernel version
     debug: 
