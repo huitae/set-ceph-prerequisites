@@ -21,7 +21,7 @@
       - "kernel-core-{{ old_kernel_result.stdout }}"
       - "kernel-modules-{{ old_kernel_result.stdout }}"
       - "kernel-{{ old_kernel_result.stdout }}"
-    when: delete_previous_kernel == "yes" && old_kernel_result.stdout != new_kernel_result.stdout
+    when: (delete_previous_kernel == "yes") and (old_kernel_result.stdout != new_kernel_result.stdout)
 
   - name: Check new kernel version
     command: uname -r
