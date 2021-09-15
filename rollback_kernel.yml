@@ -19,12 +19,8 @@
 
   - name: Remove previous kernel
     yum: 
-      name: "{{ item }}"
+      name: "kernel*-{{ old_kernel_result.stdout }}"
       state: absent
-    with_items:
-      - "kernel-core-{{ old_kernel_result.stdout }}"
-      - "kernel-modules-{{ old_kernel_result.stdout }}"
-      - "kernel-{{ old_kernel_result.stdout }}"
     when: (delete_previous_kernel == "yes") and (old_kernel_result.stdout != new_kernel_result.stdout)
 
   - name: Compare the kernel version
