@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
   - name: Check current kernel version
-    command: uname -a
+    command: uname -r
     register: old_kernel_result
 
   - name: Patch kernel with latest version on RHEL
@@ -16,7 +16,7 @@
     when: reboot == "yes"
 
   - name: Check new kernel version
-    command: uname -a
+    command: uname -r
     register: new_kernel_result
 
   - name: Compare the kernel version

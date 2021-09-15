@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
   - name: Check current kernel version
-    command: uname -a
+    command: uname -r
     register: old_kernel_result
 
   - name: Set default kernel with targeted version
@@ -13,8 +13,18 @@
       reboot_timeout: 300
     when: reboot == "yes"
 
+  - name: Remove previous kernel
+    yum: 
+      name: "{{ item }}"
+      state: absent
+    with_items:
+      - "kernel-core-{{ old_kernel_result.stdout }}"
+      - "kernel-modules-{{ old_kernel_result.stdout }}"
+      - "kernel-{{ old_kernel_result.stdout }}"
+    when: delete_previous_kernel == "yes" && old_kernel_result.stdout != new_kernel_result.stdout
+
   - name: Check new kernel version
-    command: uname -a
+    command: uname -r
     register: new_kernel_result
 
   - name: Compare the kernel version
