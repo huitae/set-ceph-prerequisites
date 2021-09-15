@@ -11,7 +11,8 @@
       state: latest
 
   - name: Reboot the server 
-    command: reboot
+    reboot: reboot
+      reboot_timeout: 300
     when: reboot == "yes"
 
   - name: Wait until the server is up
