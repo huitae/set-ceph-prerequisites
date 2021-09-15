@@ -11,7 +11,7 @@
       state: latest
 
   - name: Reboot the server 
-    reboot: reboot
+    reboot: 
       reboot_timeout: 300
     when: reboot == "yes"
 
