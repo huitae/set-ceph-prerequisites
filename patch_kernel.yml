@@ -15,11 +15,6 @@
       reboot_timeout: 300
     when: reboot == "yes"
 
-  - name: Wait until the server is up
-    wait_for_connection: 
-      delay: 15
-      timeout: 300
-
   - name: Check new kernel version
     command: uname -a
     register: new_kernel_result
